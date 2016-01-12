@@ -122,10 +122,11 @@ qq.UploadHandlerController = function(o, namespace) {
             //This event was created in case someone needs to manipulate the content of the chunk.
             //It validates the chunk size afterwards so it doesn't cause any problems.
             //File integrity is the developer's responsability in case they want to manipulate the blob.
-            //The usage of this event isn't recommended unless it's REALLY necessary and the developer knows what they are doing. 
+            //The usage of this event isn't recommended unless it's REALLY necessary and the developer knows what they are doing.
             options.onProcessingChunkData(id, chunkData, function () {
-                if (chunkData.blob.size !== originalBlobSize && chunkData.count < chunkData.part)
+                if (chunkData.blob.size !== originalBlobSize && chunkData.count < chunkData.part) {
                     throw "The chunk size has changed.";
+                }
 
                 //This will update the cached chunk in case it has changed.
                 handler.updateCachedChunk(id, chunkIdx, chunkData.blob);

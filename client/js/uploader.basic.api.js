@@ -1514,8 +1514,9 @@
         },
 
         _onProcessingChunkData: function(id, chunkData, processedDataCallback) {
-            if (!chunkData.handled)
+            if (!chunkData.handled) {
                 processedDataCallback();
+            }
         },
 
         _onUploadStatusChange: function(id, oldStatus, newStatus) {
