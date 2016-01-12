@@ -259,7 +259,8 @@ qq.XhrUploadHandler = function(spec) {
                 partIndex: chunkData.part,
                 startByte: chunkData.start + 1,
                 endByte: chunkData.end,
-                totalParts: chunkData.count
+                totalParts: chunkData.count,
+                chunkSize: chunkData.size
             };
         },
 
