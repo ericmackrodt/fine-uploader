@@ -115,15 +115,14 @@ qq.UploadHandlerController = function(o, namespace) {
                 chunkIdx = chunked.nextPart(id),
                 chunkData = handler._getChunkData(id, chunkIdx),
                 resuming = handler._getFileState(id).attemptingResume,
-                inProgressChunks = handler._getFileState(id).chunking.inProgress || [];
-
-            var originalBlobSize = chunkData.blob.size;
+                inProgressChunks = handler._getFileState(id).chunking.inProgress || [],
+                originalBlobSize = chunkData.blob.size;
 
             //This event was created in case someone needs to manipulate the content of the chunk.
             //It validates the chunk size afterwards so it doesn't cause any problems.
-            //File integrity is the developer's responsability in case they want to manipulate the blob.
+            //File integrity is the developer's responsibility in case they want to manipulate the blob.
             //The usage of this event isn't recommended unless it's REALLY necessary and the developer knows what they are doing.
-            options.onProcessingChunkData(id, chunkData, function () {
+            options.onProcessingChunkData(id, chunkData, function() {
                 if (chunkData.blob.size !== originalBlobSize && chunkData.count < chunkData.part) {
                     throw "The chunk size has changed.";
                 }
